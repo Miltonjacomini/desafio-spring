@@ -1,5 +1,9 @@
 package br.com.alura.dayscode;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +17,15 @@ public class FilmeController {
     private RestTemplate restTemplate;
 
     @GetMapping("/top250")
-    public String getTop250Filmes() {
+    public ListOfMovies getTop250Filmes() {
 
-        ResponseEntity<String> response =
-                this.restTemplate.getForEntity("https://imdb-api.com/en/API/Top250Movies/k_puevtnbr", String.class);
+        ResponseEntity<ListOfMovies> response =
+                this.restTemplate.getForEntity("https://imdb-api.com/en/API/Top250Movies/k_puevtnbr", ListOfMovies.class);
 
         return response.getBody();
     }
+
+    record Movie(String title, String image, String year, String imDbRating){}
+    record ListOfMovies(List<Movie> items){}
 
 }
