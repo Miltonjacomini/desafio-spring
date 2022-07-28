@@ -16,7 +16,7 @@ public class FilmeController {
     public String getTop250Filmes() {
 
         ResponseEntity<String> response =
-                this.restTemplate.getForEntity("https://imdb-api.com/en/API/Top250Movies/k_puevtnbr", String.class);
+                this.restTemplate.getForEntity("https://imdb-api.com/en/API/Top250Movies/sua-api-key", String.class);
 
         return response.getBody();
     }
