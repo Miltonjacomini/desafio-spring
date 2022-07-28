@@ -1,7 +1,5 @@
 package br.com.alura.dayscode;
 
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,12 +23,13 @@ class ApplicationTests {
 	@Test
 	void shouldReturnTop250Films() {
 
-		ResponseEntity<Map> response =
-				this.restTemplate.getForEntity("http://localhost:" + port + "/top250", Map.class);
+		ResponseEntity<FilmeController.ListOfMovies> response =
+				this.restTemplate.getForEntity("http://localhost:" + port + "/top250", FilmeController.ListOfMovies.class);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertNotNull(response.getBody());
 
+		assertEquals(250, response.getBody().items());
 	}
 
 }
