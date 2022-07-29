@@ -29,7 +29,7 @@ class ApplicationTests {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertNotNull(response.getBody());
 
-		assertEquals(250, response.getBody().items());
+		assertEquals(250, response.getBody().items().size());
 	}
 
 }
