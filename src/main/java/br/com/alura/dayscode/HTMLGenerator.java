@@ -1,6 +1,7 @@
 package br.com.alura.dayscode;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 public class HTMLGenerator {
 
