@@ -40,7 +40,7 @@ public class FilmeController {
         return movies;
     }
 
-    public record Movie(String title, String image, String year, String imDbRating){}
+    public record Movie(String id, String title, String image, String year, String imDbRating){}
     public record ListOfMovies(List<Movie> items){}
 
 }
