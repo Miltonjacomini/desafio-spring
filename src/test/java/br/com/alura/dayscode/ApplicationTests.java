@@ -34,7 +34,7 @@ class ApplicationTests {
 	}
 
 	@Test
-	void shouldInsertToFavorites() {
+	void shouldInsertToFavoritos() {
 
 		String filmeId = "tt0068646";
 
@@ -45,4 +45,14 @@ class ApplicationTests {
 		assertEquals(FilmeController.POST_SUCCESS, response.getBody());
 
 	}
+
+	@Test
+	void shouldReturnFavoritos() {
+
+		ResponseEntity<FilmeController.ListOfMovies> response =
+				this.restTemplate.getForEntity("http://localhost:" + port + "/favoritos", FilmeController.ListOfMovies.class);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+	}
+
 }

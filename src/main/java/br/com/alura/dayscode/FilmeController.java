@@ -30,6 +30,8 @@ public class FilmeController {
     @GetMapping("/top250")
     public ListOfMovies getTop250Filmes(@RequestParam(required = false) String title) throws FileNotFoundException {
 
+        this.movies.items().clear();
+
         ListOfMovies response = this.imdbApiClient.getBody();
 
         if (Objects.nonNull(title)) {
@@ -65,6 +67,18 @@ public class FilmeController {
         } else {
             return POST_FAIL;
         }
+    }
+
+    @GetMapping("/favoritos")
+    public ListOfMovies getFavoritos() throws FileNotFoundException {
+
+        if (!favoritos.items.isEmpty()) {
+            PrintWriter writer = new PrintWriter("src/main/resources/favoritos.html");
+            new HTMLGenerator(writer).generate(favoritos);
+            writer.close();
+        }
+
+        return favoritos;
     }
 
     public record Movie(String id, String title, String image, String year, String imDbRating){}
