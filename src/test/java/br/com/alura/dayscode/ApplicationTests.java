@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationTests {
@@ -32,4 +33,16 @@ class ApplicationTests {
 		assertEquals(250, response.getBody().items().size());
 	}
 
+	@Test
+	void shouldInsertToFavorites() {
+
+		String filmeId = "tt0068646";
+
+		ResponseEntity<String> response =
+				this.restTemplate.postForEntity("http://localhost:" + port + "/favorito/" + filmeId, null, String.class);
+
+		assertTrue(response.getStatusCode().is2xxSuccessful());
+		assertEquals(FilmeController.POST_SUCCESS, response.getBody());
+
+	}
 }
